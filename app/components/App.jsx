@@ -12,23 +12,42 @@ export default class App extends React.Component {
 			notes: [
 			{
 				id: uuid.v4(),
-				task: "Learn React"
+				task: 'Learn React'
 			},
 			{
 				id: uuid.v4(),
-				task: "Do Laundry"
+				task: 'Do Laundry'
 			}
 			]
 		};
 	}
 	render() {
-		 const {notes} = this.state;
-
-		 return (
-		 	<div>
-		 	  <button onClick={()=> console.log('add note')}>+</button>
-		 	  <Notes notes={notes}/>
-		 	</div>
-		 );
+		const {notes} = this.state;
+		return (
+			<div>
+			<button onClick={this.addNote}>+</button>
+			<Notes notes={notes} onDelete={this.deleteNote}/>
+			</div>
+			);
 	}
+	addNote=()=>{
+		this.setState({
+			notes: this.state.notes.concat([{
+				id: uuid.v4(),
+				task: 'New Task'
+			}])
+		});
+
+	}
+
+	deleteNote = (id, e) => {
+		//Avoid bubling to edit
+		e.stopPropagation();
+		this.setState({
+			notes: this.state.notes.filter(note => note.id !==id)
+		});
+
+	}
+
+
 }
