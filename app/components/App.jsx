@@ -5,23 +5,26 @@ import Lanes from './Lanes';
 import LaneActions from '../actions/LaneActions';
 
 const App = ({LaneActions, lanes}) => {
-	const addLane = () => {
-		LaneActions.create({
-			id: uuid.v4(),
-			name: 'New Lane'
-		});
-	};
-
-	return (
-		<div>
-		<button className="add-lane" onClick={addLane}>+</button>
-		<Lanes lanes ={lanes} />
-		</div>
-		);
+  const addLane = () => {
+    LaneActions.create({
+      id: uuid.v4(),
+      name: 'New lane'
+    });
+  };
+  const removeAllLanes = () => {
+    LaneActions.clear();
+  };
+  
+  return (
+    <div>
+      <button className="add-lane" onClick={addLane}>+</button>
+      <Lanes lanes={lanes} />
+    </div>
+  );
 };
 
 export default connect(({lanes}) => ({
-	lanes
+  lanes
 }), {
-	LaneActions
+  LaneActions
 })(App)
