@@ -11,12 +11,14 @@ export default connect(() => ({}), {
 	const addNote = e => {
 		e.stopPropagation();
 		const noteId = uuid.v4();
+
 		NoteActions.create({
 			id:noteId,
 			task: 'New task'
 		});
+
 		LaneActions.attachToLane({
-			laneId: lane.Id,
+			laneId: lane.id,
 			noteId
 		});
 	};
